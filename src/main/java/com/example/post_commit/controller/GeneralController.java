@@ -6,9 +6,13 @@ import com.example.post_commit.service.CommentService;
 import com.example.post_commit.service.PostService;
 import com.example.post_commit.service.UserLikeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -24,25 +28,25 @@ public class GeneralController {
     private UserLikeService userLikeService;
 
 
-
     @GetMapping("get/all/posts")
-    private List<PostDTO> findAllPosts(){
+    private List<PostDTO> findAllPosts() {
 
         return postService.findAllPosts();
     }
 
     @PostMapping("save/post")
-    public PostDTO createPost(@RequestBody PostDTO postDTO){
-        return postService.createPost(postDTO);
+    public ResponseEntity<?> createPost(@Valid @RequestBody PostDTO postDTO, BindingResult result) {
+
+        return new ResponseEntity<>(postService.createPost(postDTO), HttpStatus.ACCEPTED);
     }
 
     @PutMapping("update/post")
-    public PostDTO updatePost(@RequestBody PostDTO postDTO) {
-        return postService.updatePost(postDTO);
+    public ResponseEntity<?> updatePost(@Valid @RequestBody PostDTO postDTO, BindingResult result) {
+        return new ResponseEntity<>(postService.updatePost(postDTO),HttpStatus.OK);
     }
 
     @DeleteMapping("delete/post/{id}")
-    public void deletePost(@PathVariable Integer id) {
+    public void deletePost(@Valid @PathVariable Integer id, BindingResult result) {
         postService.deletePost(id);
     }
 
