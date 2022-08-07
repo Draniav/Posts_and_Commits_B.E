@@ -30,9 +30,6 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<PostDTO> findAllPosts() {
-
-        // Set<PostDTO> posts = new LinkedHashSet<>();
-        // postRepository.findAll();
         var posts = postRepository.findAll();
         var postDTOs = posts.stream().map(post -> mapper.fromEntityToPostDto(post)).toList();
         return postDTOs;
@@ -41,12 +38,12 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostDTO updatePost(PostDTO postDTO) {
-        var postOptional = postRepository.findById(postDTO.getId());
-        if (postOptional.isPresent()) {
-            var postUpdated = postRepository.save(mapper.fromPostDtoToEntity(postDTO));
-            var postUpdatedDto = mapper.fromEntityToPostDto(postUpdated);
-            return postUpdatedDto;
+    public PostDTO updatePost(PostDTO newPost) {
+        var oldPost = postRepository.findById(newPost.getId());
+        if (oldPost.isPresent()) {
+            var updatedPost = mapper.updateExistingPost(oldPost.get(), newPost);
+            var savedPost = postRepository.save(updatedPost);
+            return mapper.fromEntityToPostDto(savedPost);
         }
 
         throw new IllegalStateException("ERROR the post don´t exist");
@@ -55,6 +52,5 @@ public class PostServiceImpl implements PostService {
     @Override
     public void deletePost(Integer id) {
         postRepository.deleteById(id);
-
     }
 }

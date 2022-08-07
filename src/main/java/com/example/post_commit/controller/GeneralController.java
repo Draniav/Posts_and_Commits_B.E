@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
-import java.util.Set;
+
 
 @RestController
 @RequestMapping("api/v1/")
@@ -36,6 +36,14 @@ public class GeneralController {
         return postService.createPost(postDTO);
     }
 
+    @PutMapping("update/post")
+    public PostDTO updatePost(@RequestBody PostDTO postDTO) {
+        return postService.updatePost(postDTO);
+    }
 
+    @DeleteMapping("delete/post/{id}")
+    public void deletePost(@PathVariable Integer id) {
+        postService.deletePost(id);
+    }
 
 }

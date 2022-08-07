@@ -20,6 +20,7 @@ public class CustomMapper {
 
         return post;
     }
+
     public PostDTO fromEntityToPostDto(Post entity) {
         var postDto = new PostDTO();
         postDto.setId(entity.getId());
@@ -31,7 +32,7 @@ public class CustomMapper {
         return postDto;
     }
 
-    public Comment fromCommentDtoToEntity(CommentDTO dto){
+    public Comment fromCommentDtoToEntity(CommentDTO dto) {
         var comment = new Comment();
         comment.setId(dto.getId());
         comment.setContent(dto.getContent());
@@ -40,7 +41,8 @@ public class CustomMapper {
         comment.setFkPost(dto.getFkpost());
         return comment;
     }
-    public CommentDTO fromEntityToCommentDto(Comment entity){
+
+    public CommentDTO fromEntityToCommentDto(Comment entity) {
         var commentDto = new CommentDTO();
         commentDto.setId(entity.getId());
         commentDto.setContent(entity.getContent());
@@ -50,7 +52,7 @@ public class CustomMapper {
         return commentDto;
     }
 
-    public UserLike fromUserLikeDtoToEntity(UserLikeDTO dto){
+    public UserLike fromUserLikeDtoToEntity(UserLikeDTO dto) {
         var userlike = new UserLike();
         userlike.setId(dto.getId());
         userlike.setDni(dto.getDni());
@@ -59,7 +61,8 @@ public class CustomMapper {
         userlike.setComments(dto.getComments());
         return userlike;
     }
-    public UserLikeDTO fromEntityToUserLikeDto(UserLike entity){
+
+    public UserLikeDTO fromEntityToUserLikeDto(UserLike entity) {
         var userlikeDto = new UserLikeDTO();
         userlikeDto.setId(entity.getId());
         userlikeDto.setDni(entity.getDni());
@@ -69,4 +72,23 @@ public class CustomMapper {
         return userlikeDto;
     }
 
+    public Post updateExistingPost(Post oldPost, PostDTO newPost) {
+        var newPostTitle = newPost.getTitle();
+        var newPostContent = newPost.getContent();
+        var newPostNumberOfLikes = newPost.getNumberOfLikes();
+
+        if (newPostTitle != null) {
+            oldPost.setTitle(newPostTitle);
+        }
+
+        if (newPostContent != null) {
+            oldPost.setContent(newPostContent);
+        }
+
+        if (newPostNumberOfLikes != null) {
+            oldPost.setNumberOfLikes(newPostNumberOfLikes);
+        }
+
+        return oldPost;
+    }
 }

@@ -23,13 +23,13 @@ public class Post {
     @Column(name = "number_of_likes", nullable = false)
     private Integer numberOfLikes;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_like_has_post",
             joinColumns = @JoinColumn(name = "post_id_post"),
             inverseJoinColumns = @JoinColumn(name = "user_like_id_user_like"))
     private Set<UserLike> userLikes = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "fkPost")
+    @OneToMany(mappedBy = "fkPost", fetch = FetchType.EAGER)
     @JsonManagedReference
     private Set<Comment> comments = new LinkedHashSet<>();
 
