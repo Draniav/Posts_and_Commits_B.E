@@ -1,6 +1,7 @@
 package com.example.post_commit.controller;
 
 
+import com.example.post_commit.dto.CommentDTO;
 import com.example.post_commit.dto.PostDTO;
 import com.example.post_commit.service.CommentService;
 import com.example.post_commit.service.PostService;
@@ -46,8 +47,22 @@ public class GeneralController {
     }
 
     @DeleteMapping("delete/post/{id}")
-    public void deletePost(@Valid @PathVariable Integer id, BindingResult result) {
-        postService.deletePost(id);
+    public boolean deletePost(@PathVariable("id")  Integer id) {
+        try{
+            postService.deletePost(id);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+
+
+    }
+
+
+    @PostMapping("save/comments")
+    public ResponseEntity<?> createComment(@Valid @RequestBody CommentDTO commentDTO, BindingResult result) {
+
+        return new ResponseEntity<>(commentService.createComment(commentDTO), HttpStatus.ACCEPTED);
     }
 
 }

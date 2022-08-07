@@ -38,7 +38,7 @@ public class CustomMapper {
         comment.setContent(dto.getContent());
         comment.setNumberOfLikes(dto.getNumberOfLikes());
         comment.setUserLikes(dto.getUserLikes());
-        comment.setFkPost(dto.getFkpost());
+        comment.setFkPost(dto.getFkPost());
         return comment;
     }
 
@@ -48,7 +48,7 @@ public class CustomMapper {
         commentDto.setContent(entity.getContent());
         commentDto.setNumberOfLikes(entity.getNumberOfLikes());
         commentDto.setUserLikes(entity.getUserLikes());
-        commentDto.setFkpost(entity.getFkPost());
+        commentDto.setFkPost(entity.getFkPost());
         return commentDto;
     }
 

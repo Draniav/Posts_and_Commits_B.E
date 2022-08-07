@@ -16,7 +16,7 @@ public class CommentDTO {
     @Size(min=10, max = 255, message = "Error the number of characters must be min 10 max 255")
     private String content;
     private Integer numberOfLikes=0;
-    private Post fkpost;//
+    private Post fkPost;//
     private Set<UserLike> userLikes = new LinkedHashSet<>();
 
 }
