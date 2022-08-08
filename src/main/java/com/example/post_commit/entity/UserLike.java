@@ -18,13 +18,13 @@ public class UserLike {
     @Column(name = "dni", nullable = false, length = 20)
     private String dni;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "comments_has_user_like",
             joinColumns = @JoinColumn(name = "user_like_id_user_like"),
             inverseJoinColumns = @JoinColumn(name = "comments_id_comments"))
     private Set<Comment> comments = new LinkedHashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_like_has_post",
             joinColumns = @JoinColumn(name = "user_like_id_user_like"),
             inverseJoinColumns = @JoinColumn(name = "post_id_post"))

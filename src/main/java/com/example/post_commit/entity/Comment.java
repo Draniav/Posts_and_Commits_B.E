@@ -20,12 +20,12 @@ public class Comment {
     @Column(name = "number_of_likes", nullable = false)
     private Integer numberOfLikes;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "fk_Post", nullable = false)
     @JsonBackReference
     private Post fkPost;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "comments_has_user_like",
             joinColumns = @JoinColumn(name = "comments_id_comments"),
             inverseJoinColumns = @JoinColumn(name = "user_like_id_user_like"))
