@@ -64,5 +64,8 @@ public class GeneralController {
 
         return new ResponseEntity<>(commentService.createComment(commentDTO), HttpStatus.ACCEPTED);
     }
-
+    @PutMapping("update/comments")
+    public ResponseEntity<?> updateComment(@Valid @RequestBody CommentDTO commentDTO, BindingResult result) {
+        return new ResponseEntity<>(commentService.updateComment(commentDTO),HttpStatus.OK);
+    }
 }
