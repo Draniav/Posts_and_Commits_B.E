@@ -68,4 +68,16 @@ public class GeneralController {
     public ResponseEntity<?> updateComment(@Valid @RequestBody CommentDTO commentDTO, BindingResult result) {
         return new ResponseEntity<>(commentService.updateComment(commentDTO),HttpStatus.OK);
     }
+
+    @DeleteMapping("delete/comments/{id}")
+    public boolean deleteComment(@PathVariable("id")  Integer id) {
+        try{
+            commentService.deleteComment(id);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+
+
+    }
 }
